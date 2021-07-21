@@ -1,14 +1,21 @@
 import Item from './Item.js';
-import data from '../dataset.json';
+import { useSelector } from 'react-redux';
+import store from '../store/store.js';
 
 const ListItems = () => {
-    const html = data.stores.map((item) => {
-        return <Item key={item.id} data={item}/>
+    const editId = useSelector(state => state.editItem.id);
+
+    const items = store.getState().stores.map(item => {
+        if (item.id === editId) {
+            return <Item key={item.id} data={item} edit={true}/>            
+        } else {
+            return <Item key={item.id} data={item}/>
+        }
     });
 
     return (
         <div>
-            { html }
+            {items}
         </div>
     )
 }
