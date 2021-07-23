@@ -10,10 +10,7 @@ const ListWrap = styled.ul`
 `
 
 const ListItems = () => {
-    const editId = useSelector(state => state.editItem.id);
-    const stores = useSelector(state => state.stores);
-    const viewDetail = useSelector(state => state.viewDetail);
-    console.log(viewDetail, 'item');
+    const {editId, stores, viewDetail} = useSelector(state => state);
 
     const items = stores.map(item => {
         if (item.id === editId && !viewDetail) {

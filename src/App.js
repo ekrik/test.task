@@ -1,15 +1,18 @@
 import ListItems from './components/ListItems.js';
 import Detail from './components/Detail.js';
+import Error from './components/Error.js';
 import { useSelector } from 'react-redux';
 
 const App = () => {
-  const dataDetail = useSelector(state => state.viewDetail);
-  const editItem = useSelector(state => state.editItem);
+  const { editId, viewDetail, error } = useSelector(state => state);
 
   return (
     <div>
-        {dataDetail &&
-          <Detail data={dataDetail} edit={editItem}/>
+        {error &&
+          <Error text={error}/>
+        }
+        {viewDetail &&
+          <Detail data={viewDetail} edit={editId}/>
         }
         <ListItems/>
     </div>
