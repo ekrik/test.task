@@ -1,10 +1,21 @@
 import ListItems from './components/ListItems.js';
 import Detail from './components/Detail.js';
 import Error from './components/Error.js';
-import { useSelector } from 'react-redux';
+import dataset from './dataset.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { INIT_DATA } from './store/action.js';
 
-const App = () => {
-  const { editId, viewDetail, error } = useSelector(state => state);
+const App = () => {  
+  const dispatch = useDispatch();
+  const { editId, viewDetail, error, stores } = useSelector(state => state);
+
+  const getData = () => {
+    dispatch({type: INIT_DATA, stores: dataset.stores});    
+  }
+  
+  if (!stores) {
+    getData();
+  }
 
   return (
     <div>

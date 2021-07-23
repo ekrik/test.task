@@ -4,12 +4,12 @@ import {
     SAVE_ITEM,
     CLOSE_DETAIL,
     VIEW_DETAIL,
-    ERROR
+    ERROR,
+    INIT_DATA
 } from './action.js';
-import data from '../dataset.json';
 
 const defaultState = {
-    stores: data.stores,
+    stores: false,
     editId: false,
     viewDetail: false,
     delete: 0,
@@ -18,6 +18,8 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
     switch(action.type) {
+        case INIT_DATA:
+            return { ...state, stores: action.stores };
         case DELETE_ITEM:
             const storesUpdate = state.stores.filter((item) => item.id !== action.id );
             return { ...state, stores: storesUpdate};
